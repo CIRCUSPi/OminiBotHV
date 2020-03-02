@@ -14,13 +14,26 @@ Driver           :  [Minibalance](https://github.com/iCShopMgr/OminiBotHV/blob/m
 
 Communication    :  [OminiBotHV_20200226](https://github.com/iCShopMgr/OminiBotHV/blob/master/communication/OminiBotHV_20200226.pdf)
 
-operation manual :  Will coming soon ... 
+operation manual :  will coming soon ... 
+
+Where to buy     :  [OminiBotHV](https://www.icshop.com.tw/product_info.php/products_id/27788)
+
+----
+## More information
+
+You can visit our [official website](http://www.circuspi.com/) and [online shopping platform](https://www.icshop.com.tw/index.php) to search more information about us.
+
+We provide many kinds of tutorial.
+
+For microcontroller , such as  [Arduino](http://www.circuspi.com/index.php/category/technical-article/arduino/) , [linkit 7697](http://www.circuspi.com/index.php/category/technical-article/linkit/) , [micro:bit](http://www.circuspi.com/index.php/category/technical-article/mbitbot-mini/) .
+
+For AI and Robot , such as [ROS](http://www.circuspi.com/index.php/category/technical-article/ros/).
 
 ----
 
 ## Development log
 
-* 2020/02/06
+* 2020/02/24
 
 > 1. 修正說明書2C-7錯誤
 > 2. 修正位置模式錯誤
