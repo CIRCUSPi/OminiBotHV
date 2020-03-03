@@ -25,9 +25,13 @@ You can visit our [official website](http://www.circuspi.com/) and [online shopp
 
 We provide many kinds of tutorial.
 
-For microcontroller , such as  [Arduino](http://www.circuspi.com/index.php/category/technical-article/arduino/) , [linkit 7697](http://www.circuspi.com/index.php/category/technical-article/linkit/) , [micro:bit](http://www.circuspi.com/index.php/category/technical-article/mbitbot-mini/) .
+* For microcontroller , we have
+> [Arduino](http://www.circuspi.com/index.php/category/technical-article/arduino/) .
+> [linkit 7697](http://www.circuspi.com/index.php/category/technical-article/linkit/) .
+> [micro:bit](http://www.circuspi.com/index.php/category/technical-article/mbitbot-mini/) .
 
-For AI and Robot , such as [ROS](http://www.circuspi.com/index.php/category/technical-article/ros/).
+* For AI and Robot , we have 
+> [ROS](http://www.circuspi.com/index.php/category/technical-article/ros/).
 
 ----
 
