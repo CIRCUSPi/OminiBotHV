@@ -10,7 +10,7 @@ This is diver about OminiBotHV( manufacturer : Circus Pi  ) , and how to use it.
 
 This repository contains driver , operation manual and communication.
 
-firmware           :  [Minibalance](https://github.com/iCShopMgr/OminiBotHV/blob/master/firmware/Minibalance_0224.hex)
+firmware         :  [Minibalance](https://github.com/iCShopMgr/OminiBotHV/blob/master/firmware/Minibalance_0224.hex)
 
 Communication    :  [OminiBotHV_20200226](https://github.com/iCShopMgr/OminiBotHV/blob/master/communication/OminiBotHV_20200224.pdf)
 
@@ -27,13 +27,13 @@ We provide many kinds of tutorial.
 
 * For microcontroller , we have
 
-> [Arduino](http://www.circuspi.com/index.php/category/technical-article/arduino/) .
-> [linkit 7697](http://www.circuspi.com/index.php/category/technical-article/linkit/) .
-> [micro:bit](http://www.circuspi.com/index.php/category/technical-article/mbitbot-mini/) .
+> 1. [Arduino](http://www.circuspi.com/index.php/category/technical-article/arduino/) .
+> 2. [linkit 7697](http://www.circuspi.com/index.php/category/technical-article/linkit/) .
+> 3. [micro:bit](http://www.circuspi.com/index.php/category/technical-article/mbitbot-mini/) .
 
 * For AI and Robot , we have 
 
-> [ROS](http://www.circuspi.com/index.php/category/technical-article/ros/).
+> 1. [ROS](http://www.circuspi.com/index.php/category/technical-article/ros/).
 
 ----
 
