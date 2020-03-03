@@ -39,7 +39,7 @@ We provide many kinds of tutorial.
 
 ## Development log
 
-* 2020/02/24
+* 2020/02/24 version : 0.5
 
 > 1. 修正說明書2C-7錯誤
 > 2. 修正位置模式錯誤
