@@ -10,9 +10,9 @@ This is diver about OminiBotHV( manufacturer : Circus Pi  ) , and how to use it.
 
 This repository contains driver , operation manual and communication.
 
-firmware         :  [Minibalance](https://github.com/iCShopMgr/OminiBotHV/blob/master/firmware/Minibalance_0224.hex)
+firmware         :  [Minibalance](https://github.com/CIRCUSPi/OminiBotHV/blob/master/firmware/Minibalance_0407.hex)
 
-Communication    :  [OminiBotHV_20200226](https://github.com/iCShopMgr/OminiBotHV/blob/master/communication/OminiBotHV_20200224.pdf)
+Communication    :  [OminiBotHV_20200226](https://github.com/CIRCUSPi/OminiBotHV/blob/master/communication/OminiBotHV_20200407.pdf)
 
 operation manual :  will coming soon ... 
 
