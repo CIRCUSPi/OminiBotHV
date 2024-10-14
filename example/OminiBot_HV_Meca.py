@@ -21,11 +21,11 @@ class ominibothv:
                  pos_kd = 0,
                  vel_kp = 3000,
                  vel_ki = 1050):
-        
+
         self.ser = serial.Serial(port, baud, timeout = 1)
 
         self.robot_mode = divisor_mode
-        
+
         self.forced_stop()
         time.sleep(0.5)
 
@@ -53,8 +53,8 @@ class ominibothv:
         bot_set += bcc + bytearray(b'\x7d')
         self.ser.write(bot_set)
         time.sleep(0.1)
-        
-        
+
+
         # robot pid setting
         pid_set = bytearray(b'\x7b\x40')
         pid_set += pos_kp.to_bytes(2, byteorder='big')
@@ -67,7 +67,7 @@ class ominibothv:
         self.ser.write(pid_set)
         time.sleep(0.1)
 
-    
+
     def check_cmd(self, name):
         if name == 'system':
             self.ser.write(b'\x7b\x33\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x48\x7d')
@@ -75,20 +75,20 @@ class ominibothv:
             self.ser.write(b'\x7b\x34\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x4f\x7d')
         else:
             self.ser.write(b'\x7b\x50\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x2b\x7d')
-        
+
         read_val = self.ser.read(14)
-        
+
         return read_val
-        
+
     def calculate_bcc(self, data):
         bcc = 0
         for byte in data:
             bcc ^= byte
         return bcc
-    
+
     def clamp_number(self, num , a, b):
         return max(min(num, max(a, b)), min(a, b))
-    
+
     def forced_stop(self):
         set_motor_go = bytearray(b'\x7b\x25\x00')
         set_motor_go += self.robot_mode.to_bytes(1, byteorder='big')
@@ -96,7 +96,7 @@ class ominibothv:
         bcc = self.calculate_bcc(set_motor_go).to_bytes(1, byteorder='big')
         set_motor_go += bcc + bytearray(b'\x7d')
         self.ser.write(set_motor_go)
-    
+
     def motor_speed(self, m1, m2, m3, m4):
         set_motor_go = bytearray(b'\x7b\x26\x02')
         set_motor_go += self.robot_mode.to_bytes(1, byteorder='big')
@@ -104,13 +104,13 @@ class ominibothv:
         set_motor_go += struct.pack('!i',int(m2*1000))[2:]
         set_motor_go += struct.pack('!i',int(m3*1000))[2:]
         set_motor_go += struct.pack('!i',int(m4*1000))[2:]
-        
+
         bcc = self.calculate_bcc(set_motor_go).to_bytes(1, byteorder='big')
-        
+
         set_motor_go += bcc + bytearray(b'\x7d')
-        
+
         self.ser.write(set_motor_go)
-    
+
     def robot_speed(self, lx, ly, az):
         set_motor_go = bytearray(b'\x7b\x25\x02')
         set_motor_go += self.robot_mode.to_bytes(1, byteorder='big')
@@ -118,19 +118,19 @@ class ominibothv:
         set_motor_go += struct.pack('!i',int(ly*1000))[2:]
         set_motor_go += struct.pack('!i',int(az*1000))[2:]
         set_motor_go += bytearray(b'\x00\x00')
-        
+
         bcc = self.calculate_bcc(set_motor_go).to_bytes(1, byteorder='big')
-        
+
         set_motor_go += bcc + bytearray(b'\x7d')
         self.ser.write(set_motor_go)
-        
-    
+
+
     def serial_close(self):
         self.ser.close()
 
     def serial_write(self, cmd):
         self.ser.write(cmd)
-    
+
     def serial_read(self, choose=None):
         self.ser.read(choose)
     def read_robot_data(self):
@@ -147,33 +147,33 @@ class ominibothv:
                     else:
                         check = 0
                     break
-            
+
         return check, robot_vel, imu_val, bat_val[:2]
-    
+
 import numpy as np
 
 def quaternion_to_euler(q):
     # 歸一化四元數
     q = q / np.linalg.norm(q)
-    
+
     # 計算歐拉角
     roll = np.arctan2(2*(q[0]*q[1] + q[2]*q[3]), 1 - 2*(q[1]**2 + q[2]**2))
     pitch = np.arcsin(2*(q[0]*q[2] - q[3]*q[1]))
     yaw = np.arctan2(2*(q[0]*q[3] + q[1]*q[2]), 1 - 2*(q[2]**2 + q[3]**2))
-    
+
     # 將歐拉角從弧度轉換為角度
     roll = np.degrees(roll)
     pitch = np.degrees(pitch)
     yaw = np.degrees(yaw)
-    
+
     return roll, pitch, yaw
 
-    
+
 
 if __name__ == '__main__':
     import time
     pi = ominibothv(
-        port = '/dev/ominibot',
+        port = 'COM22',
         baud = 115200,
         divisor_mode = 4,
         motor_direct = 0,
@@ -190,45 +190,34 @@ if __name__ == '__main__':
         pos_kd = 0,
         vel_kp = 3000,
         vel_ki = 1050)
-    
+
     pi.robot_speed(0.08, 0.0, 0.0)
-    
+
     ot = time.ctime(time.time())
     t1 = time.time()
     while True:
-        
-        check, robot_vel, imu_val = pi.read_robot_data()
-        
+
+        checkCmd, robot_vel, imu_val, bat_val = pi.read_robot_data()
+
+        battry = int.from_bytes(bat_val, byteorder='big', signed=True)/1000
+        print(battry)
+
         lx = int.from_bytes(robot_vel[:2], byteorder='big', signed=True)/1000
         ly = int.from_bytes(robot_vel[2:4], byteorder='big', signed=True)/1000
         az = int.from_bytes(robot_vel[4:], byteorder='big', signed=True)/1000
-        #print(lx, ly, az)
-        
+        print(lx, ly, az)
+
         qw = int.from_bytes(imu_val[12:14], byteorder='big', signed=True)/1000
         qx = int.from_bytes(imu_val[14:16], byteorder='big', signed=True)/1000
         qy = int.from_bytes(imu_val[16:18], byteorder='big', signed=True)/1000
         qz = int.from_bytes(imu_val[18:], byteorder='big', signed=True)/1000
-        #print(qw, qx, qy, qz)
-        
+        print(qw, qx, qy, qz)
+
         quaternion = np.array([qw, qx, qy, qz])
         roll, pitch, yaw = quaternion_to_euler(quaternion)
         # print("Yaw: ", yaw)
-        
+
         if time.time() - t1 >= 3:
-            break 
-    
+            break
+
     pi.robot_speed(0.0, 0.0, 0.0)
-    
-
-    
-    
-            
-    
-    
-           
-
-
-
-
-
-
